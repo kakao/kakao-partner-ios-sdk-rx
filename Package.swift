@@ -26,9 +26,9 @@ let package = Package(
     ],
     dependencies: [
         .package(name: "RxKakaoOpenSDK",
-                 url: "https://github.com/kakao/kakao-ios-sdk-rx.git", .branch("master")),
+                 url: "https://github.com/kakao/kakao-ios-sdk-rx.git", .branch("develop")),
         .package(name: "KakaoPartnerSDK",
-                 url: "https://github.com/kakao/kakao-partner-ios-sdk.git", .branch("master"))
+                 url: "https://github.com/kakao/kakao-partner-ios-sdk.git", .branch("develop"))
     ],
     targets: [
         .target(
