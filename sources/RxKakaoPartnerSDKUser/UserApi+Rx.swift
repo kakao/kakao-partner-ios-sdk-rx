@@ -53,9 +53,9 @@ extension Reactive where Base: UserApi {
             .asSingle()
     }
     
-    /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 사용자 아이디가 반환됩니다.
-    public func signupForPartner() -> Single<Int64?> {
-        return AUTH.rx.responseData(.post, Urls.compose(path:PartnerPaths.signup))
+    /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 회원번호가 반환됩니다.
+    public func signupForPartner(properties: [String:String]? = nil) -> Single<Int64?> {
+        return AUTH.rx.responseData(.post, Urls.compose(path:PartnerPaths.signup), parameters: ["properties": properties?.toJsonString()].filterNil())
             .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
             .compose(PARTNER_AUTH.rx.checkAgeAuthRetryComposeTransformer())
             .map({ (response, data) -> Int64? in
