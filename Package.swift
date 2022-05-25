@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.9.1
+// sdk-version:2.10.0
 
 import PackageDescription
 
@@ -30,11 +30,11 @@ let package = Package(
     dependencies: [
         .package(name: "RxKakaoOpenSDK",
                  url: "https://github.com/kakao/kakao-ios-sdk-rx.git",
-                 .exact("2.9.1")
+                 .exact("2.10.0")
                 ),
         .package(name: "KakaoPartnerSDK",
                  url: "https://github.com/kakao/kakao-partner-ios-sdk.git",
-                 .exact("2.9.1")
+                 .exact("2.10.0")
                 )
     ],
     targets: [
@@ -45,7 +45,7 @@ let package = Package(
                 .product(name: "RxKakaoSDKAuth", package: "RxKakaoOpenSDK"),
                 .product(name: "RxKakaoSDKCommon", package: "RxKakaoOpenSDK"),
             ],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "RxKakaoPartnerSDKUser",
@@ -54,7 +54,7 @@ let package = Package(
                 .product(name: "KakaoPartnerSDKUser", package: "KakaoPartnerSDK"),
                 .product(name: "RxKakaoSDKUser", package: "RxKakaoOpenSDK"),
             ],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "RxKakaoPartnerSDKTalk",
@@ -63,7 +63,7 @@ let package = Package(
                 .product(name: "KakaoPartnerSDKTalk", package: "KakaoPartnerSDK"),
                 .product(name: "RxKakaoSDKTalk", package: "RxKakaoOpenSDK"),
             ],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "RxKakaoPartnerSDKLink",
@@ -72,7 +72,7 @@ let package = Package(
                 .product(name: "RxKakaoSDKCommon", package: "RxKakaoOpenSDK"),
                 .product(name: "RxKakaoSDKLink", package: "RxKakaoOpenSDK")
             ],
-            exclude: ["Info.plist"]
+            exclude: ["Info.plist", "README.md"]
         )
     ],
     swiftLanguageVersions: [

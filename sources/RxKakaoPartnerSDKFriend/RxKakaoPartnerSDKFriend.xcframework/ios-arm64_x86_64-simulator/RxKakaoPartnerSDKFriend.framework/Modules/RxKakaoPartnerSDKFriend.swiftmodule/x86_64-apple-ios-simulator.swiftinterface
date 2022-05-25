@@ -1,30 +1,28 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.5 (swiftlang-1300.0.31.1 clang-1300.0.29.1)
+// swift-compiler-version: Apple Swift version 5.6 (swiftlang-5.6.0.323.62 clang-1316.0.20.8)
 // swift-module-flags: -target x86_64-apple-ios11.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name RxKakaoPartnerSDKFriend
 import Alamofire
 import Foundation
-import KakaoPartnerSDKCommon
 import KakaoPartnerSDKFriend
 import KakaoSDKAuth
 import KakaoSDKCommon
+import KakaoSDKFriend
 import RxAlamofire
 @_exported import RxKakaoPartnerSDKFriend
 import RxKakaoSDKAuth
 import RxKakaoSDKCommon
+import RxKakaoSDKFriend
 import RxSwift
 import Swift
 import UIKit
 import _Concurrency
-extension KakaoPartnerSDKFriend.PickerApi : RxSwift.ReactiveCompatible {
-  public typealias ReactiveBase = KakaoPartnerSDKFriend.PickerApi
-}
-extension RxSwift.Reactive where Base : KakaoPartnerSDKFriend.PickerApi {
-  public func selectFriends(params: KakaoPartnerSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoPartnerSDKFriend.SelectedUsers>
-  public func selectFriendsPopup(params: KakaoPartnerSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoPartnerSDKFriend.SelectedUsers>
-  public func selectFriend(params: KakaoPartnerSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoPartnerSDKFriend.SelectedUsers>
-  public func selectFriendPopup(params: KakaoPartnerSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoPartnerSDKFriend.SelectedUsers>
-  public func selectChat(params: KakaoPartnerSDKFriend.PickerChatRequestParams) -> RxSwift.Observable<(KakaoPartnerSDKFriend.SelectedUsers?, KakaoPartnerSDKFriend.SelectedChat?)>
-  public func selectChatPopup(params: KakaoPartnerSDKFriend.PickerChatRequestParams) -> RxSwift.Observable<(KakaoPartnerSDKFriend.SelectedUsers?, KakaoPartnerSDKFriend.SelectedChat?)>
-  public func select(params: KakaoPartnerSDKFriend.PickerTabRequestParams) -> RxSwift.Observable<(KakaoPartnerSDKFriend.SelectedUsers?, KakaoPartnerSDKFriend.SelectedChat?)>
-  public func selectPopup(params: KakaoPartnerSDKFriend.PickerTabRequestParams) -> RxSwift.Observable<(KakaoPartnerSDKFriend.SelectedUsers?, KakaoPartnerSDKFriend.SelectedChat?)>
+extension RxSwift.Reactive where Base : KakaoSDKFriend.PickerApi {
+  public func selectFriends(params: KakaoSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoSDKFriend.SelectedUsers>
+  public func selectFriendsPopup(params: KakaoSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoSDKFriend.SelectedUsers>
+  public func selectFriend(params: KakaoSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoSDKFriend.SelectedUsers>
+  public func selectFriendPopup(params: KakaoSDKFriend.PickerFriendRequestParams) -> RxSwift.Observable<KakaoSDKFriend.SelectedUsers>
+  public func selectChat(params: KakaoSDKFriend.PickerChatRequestParams) -> RxSwift.Observable<(KakaoSDKFriend.SelectedUsers?, KakaoSDKFriend.SelectedChat?)>
+  public func selectChatPopup(params: KakaoSDKFriend.PickerChatRequestParams) -> RxSwift.Observable<(KakaoSDKFriend.SelectedUsers?, KakaoSDKFriend.SelectedChat?)>
+  public func select(params: KakaoSDKFriend.PickerTabRequestParams) -> RxSwift.Observable<(KakaoSDKFriend.SelectedUsers?, KakaoSDKFriend.SelectedChat?)>
+  public func selectPopup(params: KakaoSDKFriend.PickerTabRequestParams) -> RxSwift.Observable<(KakaoSDKFriend.SelectedUsers?, KakaoSDKFriend.SelectedChat?)>
 }
