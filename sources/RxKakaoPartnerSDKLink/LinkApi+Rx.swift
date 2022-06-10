@@ -23,7 +23,7 @@ import KakaoSDKLink
 import KakaoSDKTemplate
 import RxKakaoSDKLink
 
-/// 카카오링크 호출을 담당하는 클래스입니다.
+/// 카카오톡 공유 호출을 담당하는 클래스입니다.
 extension Reactive where Base: LinkApi  {
     
     func defaultLink(targetAppKey:String,
