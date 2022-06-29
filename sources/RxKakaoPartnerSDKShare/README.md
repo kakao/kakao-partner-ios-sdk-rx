@@ -1,4 +1,4 @@
-# RxKakaoPartnerSDKLink
+# RxKakaoPartnerSDKShare
 
 RxSwift를 사용하는 파트너용 카카오톡 공유 모듈입니다.
 
@@ -10,15 +10,15 @@ RxSwift를 사용하는 파트너용 카카오톡 공유 모듈입니다.
 
 ## Dependencies
 - RxKakaoSDKCommon
-- RxKakaoSDKLink
-- KakaoPartnerSDKLink
+- RxKakaoSDKShare
+- KakaoPartnerSDKShare
 
 ## Installation
 ```
-pod 'RxKakaoPartnerSDKLink'
+pod 'RxKakaoPartnerSDKShare'
 ```
 
 ## Import
 ```
-import RxKakaoPartnerSDKLink
+import RxKakaoPartnerSDKShare
 ```

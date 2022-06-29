@@ -1,7 +1,7 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.10.1
+// sdk-version:2.11.0
 
 import PackageDescription
 
@@ -13,7 +13,7 @@ let package = Package(
     products: [
         .library(
             name: "RxKakaoPartnerSDK",
-            targets: ["RxKakaoPartnerSDKAuth", "RxKakaoPartnerSDKUser", "RxKakaoPartnerSDKTalk", "RxKakaoPartnerSDKLink"]),
+            targets: ["RxKakaoPartnerSDKAuth", "RxKakaoPartnerSDKUser", "RxKakaoPartnerSDKTalk", "RxKakaoPartnerSDKShare"]),
         .library(
             name: "RxKakaoPartnerSDKAuth",
             targets: ["RxKakaoPartnerSDKAuth"]),
@@ -24,17 +24,17 @@ let package = Package(
             name: "RxKakaoPartnerSDKTalk",
             targets: ["RxKakaoPartnerSDKTalk"]),
         .library(
-            name: "RxKakaoPartnerSDKLink",
-            targets: ["RxKakaoPartnerSDKLink"])
+            name: "RxKakaoPartnerSDKShare",
+            targets: ["RxKakaoPartnerSDKShare"])
     ],
     dependencies: [
         .package(name: "RxKakaoOpenSDK",
                  url: "https://github.com/kakao/kakao-ios-sdk-rx.git",
-                 .exact("2.10.1")
+                 .exact("2.11.0")
                 ),
         .package(name: "KakaoPartnerSDK",
                  url: "https://github.com/kakao/kakao-partner-ios-sdk.git",
-                 .exact("2.10.1")
+                 .exact("2.11.0")
                 )
     ],
     targets: [
@@ -66,11 +66,11 @@ let package = Package(
             exclude: ["Info.plist", "README.md"]
         ),
         .target(
-            name: "RxKakaoPartnerSDKLink",
+            name: "RxKakaoPartnerSDKShare",
             dependencies: [
-                .product(name: "KakaoPartnerSDKLink", package: "KakaoPartnerSDK"),
+                .product(name: "KakaoPartnerSDKShare", package: "KakaoPartnerSDK"),
                 .product(name: "RxKakaoSDKCommon", package: "RxKakaoOpenSDK"),
-                .product(name: "RxKakaoSDKLink", package: "RxKakaoOpenSDK")
+                .product(name: "RxKakaoSDKShare", package: "RxKakaoOpenSDK")
             ],
             exclude: ["Info.plist", "README.md"]
         )

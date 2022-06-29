@@ -19,18 +19,18 @@ import Alamofire
 import RxAlamofire
 import KakaoPartnerSDKCommon
 import KakaoSDKCommon
-import KakaoSDKLink
+import KakaoSDKShare
 import KakaoSDKTemplate
-import RxKakaoSDKLink
+import RxKakaoSDKShare
 
 /// 카카오톡 공유 호출을 담당하는 클래스입니다.
-extension Reactive where Base: LinkApi  {
+extension Reactive where Base: ShareApi  {
     
-    func defaultLink(targetAppKey:String,
+    func shareDefault(targetAppKey:String,
                      templateObjectJsonString:String?,
-                     serverCallbackArgs:[String:String]? = nil ) -> Single<LinkResult> {
+                     serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
         return API.rx.responseData(.post,
-                                Urls.compose(path:Paths.defalutLink),
+                                Urls.compose(path:Paths.shareDefalutValidate),
                                 parameters: ["link_ver":"4.0",
                                              "template_object":templateObjectJsonString,
                                              "target_app_key":targetAppKey].filterNil(),
@@ -41,7 +41,7 @@ extension Reactive where Base: LinkApi  {
             .map({ (response, data) -> (ValidationResult, [String:Any]?) in
                 return (try SdkJSONDecoder.default.decode(ValidationResult.self, from: data), serverCallbackArgs)
             })
-            .compose(createLinkResultComposeTransformer(targetAppKey: targetAppKey))
+            .compose(createSharingResultComposeTransformer(targetAppKey: targetAppKey))
             .do (
                 onNext: { ( decoded ) in
                     SdkLog.i("decoded model:\n \(String(describing: decoded))\n\n" )
@@ -51,34 +51,34 @@ extension Reactive where Base: LinkApi  {
     }
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: [Template](../../KakaoSDKTemplate/Protocols/Templatable.html) <br> `LinkResult`
-    public func defaultLink(targetAppKey:String,
+    /// - seealso: [Template](../../KakaoSDKTemplate/Protocols/Templatable.html) <br> `SharingResult`
+    public func shareDefault(targetAppKey:String,
                             templatable: Templatable,
-                            serverCallbackArgs:[String:String]? = nil ) -> Single<LinkResult> {
-        return self.defaultLink(targetAppKey:targetAppKey,
+                            serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
+        return self.shareDefault(targetAppKey:targetAppKey,
                                 templateObjectJsonString: templatable.toJsonObject()?.toJsonString(),
                                 serverCallbackArgs:serverCallbackArgs)
     }
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: `LinkResult`
-    public func defaultLink(targetAppKey:String,
+    /// - seealso: `SharingResult`
+    public func shareDefault(targetAppKey:String,
                             templateObject:[String:Any],
-                            serverCallbackArgs:[String:String]? = nil ) -> Single<LinkResult> {
-        return self.defaultLink(targetAppKey:targetAppKey,
+                            serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
+        return self.shareDefault(targetAppKey:targetAppKey,
                                 templateObjectJsonString: templateObject.toJsonString(),
                                 serverCallbackArgs:serverCallbackArgs)
     }
     
     /// 지정된 URL을 스크랩하여 만들어진 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: `LinkResult`
-    public func scrapLink(targetAppKey:String,
+    /// - seealso: `SharingResult`
+    public func shareScrap(targetAppKey:String,
                           requestUrl:String,
                           templateId:Int64? = nil,
                           templateArgs:[String:String]? = nil,
-                          serverCallbackArgs:[String:String]? = nil ) -> Single<LinkResult> {
+                          serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
         return API.rx.responseData(.post,
-                                Urls.compose(path:Paths.scrapLink),
+                                Urls.compose(path:Paths.shareScrapValidate),
                                 parameters: ["link_ver":"4.0",
                                              "request_url":requestUrl,
                                              "template_id":templateId,
@@ -91,7 +91,7 @@ extension Reactive where Base: LinkApi  {
             .map({ (response, data) -> (ValidationResult, [String:Any]?) in
                 return (try SdkJSONDecoder.default.decode(ValidationResult.self, from: data), serverCallbackArgs)
             })
-            .compose(createLinkResultComposeTransformer(targetAppKey: targetAppKey))
+            .compose(createSharingResultComposeTransformer(targetAppKey: targetAppKey))
             .do (
                 onNext: { ( decoded ) in
                     SdkLog.i("decoded model:\n \(String(describing: decoded))\n\n" )
@@ -101,13 +101,13 @@ extension Reactive where Base: LinkApi  {
     }
     
     /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 https://developers.kakao.com/docs/latest/ko/message/ios#create-message 을 참고하시기 바랍니다.
-    /// - seealso: `LinkResult`
-    public func customLink(targetAppKey:String,
+    /// - seealso: `SharingResult`
+    public func shareCustom(targetAppKey:String,
                            templateId:Int64,
                            templateArgs:[String:String]? = nil,
-                           serverCallbackArgs:[String:String]? = nil) -> Single<LinkResult> {
+                           serverCallbackArgs:[String:String]? = nil) -> Single<SharingResult> {
         return API.rx.responseData(.post,
-                                Urls.compose(path:Paths.validateLink),
+                                Urls.compose(path:Paths.shareCustomValidate),
                                 parameters: ["link_ver":"4.0",
                                              "template_id":templateId,
                                              "template_args":templateArgs?.toJsonString(),
@@ -119,7 +119,7 @@ extension Reactive where Base: LinkApi  {
             .map({ (response, data) -> (ValidationResult, [String:Any]?) in
                 return (try SdkJSONDecoder.default.decode(ValidationResult.self, from: data), serverCallbackArgs)
             })
-            .compose(createLinkResultComposeTransformer(targetAppKey: targetAppKey))
+            .compose(createSharingResultComposeTransformer(targetAppKey: targetAppKey))
             .do (
                 onNext: { ( decoded ) in
                     SdkLog.i("decoded model:\n \(String(describing: decoded))\n\n" )
