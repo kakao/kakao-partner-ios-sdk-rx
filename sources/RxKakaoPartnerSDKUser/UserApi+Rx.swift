@@ -35,10 +35,22 @@ extension Reactive where Base: UserApi {
     
     // MARK: Login with Kakao Account
     
-    /// 카카오계정 페이지에서 로그인합니다. 이 API는 기본 브라우저의 쿠키 유무를 확인하지 않고 카카오계정 페이지를 호출하며, 추가 파라미터 "accountParameters"를 지원합니다.
-    /// 현재 카카오계정 페이지 호출 시 자동 채우기(fill-in)를 위한 "email" 키를 사용할 수 있습니다.
+    ///:nodoc:
     public func loginWithKakaoAccount(accountParameters: [String:String]) -> Observable<OAuthToken> {
-        return AuthController.shared.rx.authorizeWithAuthenticationSession(accountParameters:accountParameters)
+        return AuthController.shared.rx._authorizeWithAuthenticationSession(accountParameters:accountParameters)
+    }
+    
+    ///:nodoc:
+    public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
+                                      loginHint: String? = nil,
+                                      nonce: String? = nil,
+                                      accountsSkipIntro: Bool? = nil,
+                                      accountsTalkLoginVisible: Bool? = nil) -> Observable<OAuthToken> {
+        return AuthController.shared.rx._authorizeWithAuthenticationSession(prompts: prompts,
+                                                                            loginHint:loginHint,
+                                                                            nonce: nonce,
+                                                                            accountsSkipIntro:accountsSkipIntro,
+                                                                            accountsTalkLoginVisible: accountsTalkLoginVisible)
     }
     
     /// 사용자에 대한 다양한 정보를 얻을 수 있습니다.
