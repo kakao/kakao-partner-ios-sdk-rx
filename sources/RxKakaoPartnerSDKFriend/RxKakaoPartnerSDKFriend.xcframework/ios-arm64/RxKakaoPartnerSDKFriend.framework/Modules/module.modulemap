@@ -6,6 +6,6 @@ framework module RxKakaoPartnerSDKFriend {
 }
 
 module RxKakaoPartnerSDKFriend.Swift {
-    header "RxKakaoPartnerSDKFriend-Swift.h"
-    requires objc
+  header "RxKakaoPartnerSDKFriend-Swift.h"
+  requires objc
 }
