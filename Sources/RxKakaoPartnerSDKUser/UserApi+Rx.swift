@@ -56,8 +56,8 @@ extension Reactive where Base: UserApi {
     /// 사용자에 대한 다양한 정보를 얻을 수 있습니다.
     /// - seealso: `PartnerUser`
     public func meForPartner(propertyKeys: [String]? = nil, secureResource: Bool = true) -> Single<PartnerUser> {
-        return AUTH.rx.responseData(.get, Urls.compose(path:Paths.userMe), parameters: ["property_keys": propertyKeys?.toJsonString(), "secure_resource": secureResource].filterNil())
-            .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
+        return AUTH_API.rx.responseData(.get, Urls.compose(path:Paths.userMe), parameters: ["property_keys": propertyKeys?.toJsonString(), "secure_resource": secureResource].filterNil())
+            .compose(AUTH_API.rx.checkErrorAndRetryComposeTransformer())
             .map({ (response, data) -> (SdkJSONDecoder, HTTPURLResponse, Data) in
                 return (SdkJSONDecoder.customIso8601Date, response, data)
             })
@@ -67,9 +67,9 @@ extension Reactive where Base: UserApi {
     
     /// 앱 연결 상태가 **PREREGISTER** 상태의 사용자에 대하여 앱 연결 요청을 합니다. **자동연결** 설정을 비활성화한 앱에서 사용합니다. 요청에 성공하면 회원번호가 반환됩니다.
     public func signupForPartner(properties: [String:String]? = nil) -> Single<Int64?> {
-        return AUTH.rx.responseData(.post, Urls.compose(path:PartnerPaths.signup), parameters: ["properties": properties?.toJsonString()].filterNil())
-            .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
-            .compose(PARTNER_AUTH.rx.checkAgeAuthRetryComposeTransformer())
+        return AUTH_API.rx.responseData(.post, Urls.compose(path:PartnerPaths.signup), parameters: ["properties": properties?.toJsonString()].filterNil())
+            .compose(AUTH_API.rx.checkErrorAndRetryComposeTransformer())
+            .compose(PARTNER_AUTH_API.rx.checkAgeAuthRetryComposeTransformer())
             .map({ (response, data) -> Int64? in
                 if let json = (try? JSONSerialization.jsonObject(with:data, options:[])) as? [String: Any] {
                     return json["id"] as? Int64
@@ -92,8 +92,8 @@ extension Reactive where Base: UserApi {
     ///   - propertyKeys 추가 동의를 필요로 하는 인증 정보를 응답에 포함하고 싶은 경우, 해당 키 리스트
     public func ageAuthInfo(ageLimit: Int? = nil,
                             propertyKeys: [String]? = nil) -> Single<AgeAuthInfo> {
-        return AUTH.rx.responseData(.get, Urls.compose(path:PartnerPaths.ageAuthInfo), parameters: ["age_limit":ageLimit, "property_keys": propertyKeys?.toJsonString()].filterNil())
-            .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
+        return AUTH_API.rx.responseData(.get, Urls.compose(path:PartnerPaths.ageAuthInfo), parameters: ["age_limit":ageLimit, "property_keys": propertyKeys?.toJsonString()].filterNil())
+            .compose(AUTH_API.rx.checkErrorAndRetryComposeTransformer())
             .map({ (response, data) -> (SdkJSONDecoder, HTTPURLResponse, Data) in
                 return (SdkJSONDecoder.customIso8601Date, response, data)
             })
@@ -109,14 +109,39 @@ extension Reactive where Base: UserApi {
     ///   - scopes 추가할 동의 항목 ID 목록
     ///   - guardianToken 14세 미만 사용자인 경우 필수. 14세 미만 사용자의 동의 항목을 추가하기 위해 필요한 보호자인증 토큰
     public func upgradeScopes(scopes:[String], guardianToken: String? = nil) -> Single<ScopeInfo> {
-        return AUTH.rx.responseData(.post,
+        return AUTH_API.rx.responseData(.post,
                                     Urls.compose(path:PartnerPaths.userUpgradeScopes),
                                     parameters: ["scopes":scopes.toJsonString(), "guardian_token":guardianToken].filterNil())
-            .compose(AUTH.rx.checkErrorAndRetryComposeTransformer())
+            .compose(AUTH_API.rx.checkErrorAndRetryComposeTransformer())
             .map({ (response, data) -> (SdkJSONDecoder, HTTPURLResponse, Data) in
                 return (SdkJSONDecoder.custom, response, data)
             })
             .compose(API.rx.decodeDataComposeTransformer())
             .asSingle()
+    }
+    
+    
+    
+    ///연령인증을 요청합니다.
+    /// - seealso: `signup`
+    /// - parameters:
+    ///   - authLevel 연령인증 레벨 (1차 인증 : 실명/생년월일 인증, 2차 인증 : 휴대폰 본인 인증을 통한 통신사 명의자 인증)
+    ///   - ageLimit 연령제한 (만 나이 기준)
+    ///   - skipTerms  동의 화면 출력 여부
+    ///   - adultsOnly 서비스에서 청소년유해매체물 인증 필요 여부
+    ///   - authFrom   요청 서비스 구분
+    ///   - underAge   연령인증 페이지 구분
+    public func verifyAge(authLevel: AuthLevel? = nil,
+                              ageLimit: Int? = nil,
+                              skipTerms: Bool? = false,
+                              adultsOnly: Bool? = false,
+                              underAge: Bool? = false) -> Completable {
+        return AuthController.shared.rx.verifyAgeWithAuthenticationSession(authLevel: authLevel,
+                                                                           ageLimit: ageLimit,
+                                                                           skipTerms: skipTerms,
+                                                                           adultsOnly: adultsOnly,
+                                                                           underAge: underAge)
+            .ignoreElements()
+            .asCompletable()
     }
 }

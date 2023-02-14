@@ -25,9 +25,11 @@ import RxKakaoSDKCommon
 import KakaoSDKAuth
 import KakaoPartnerSDKAuth
 
-extension PartnerAuth: ReactiveCompatible {}
+/// :nodoc:
+extension PartnerAuthCommon: ReactiveCompatible {}
 
-extension Reactive where Base: PartnerAuth   {
+/// :nodoc:
+extension Reactive where Base: PartnerAuthCommon   {
     public func checkAgeAuthRetryComposeTransformer() -> ComposeTransformer<(HTTPURLResponse, Data), (HTTPURLResponse, Data)> {
         return ComposeTransformer<(HTTPURLResponse, Data), (HTTPURLResponse, Data)> { (observable) in
             return observable

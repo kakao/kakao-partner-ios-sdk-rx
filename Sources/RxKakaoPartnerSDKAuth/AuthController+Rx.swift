@@ -25,8 +25,10 @@ import KakaoPartnerSDKAuth
 
 import RxKakaoSDKCommon
 
+/// :nodoc:
 let AUTH_CONTROLLER = AuthController.shared
 
+/// :nodoc:
 extension Reactive where Base: AuthController {
     
     /// :nodoc:
