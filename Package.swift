@@ -1,19 +1,19 @@
 // swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.15.0
+// sdk-version:2.16.0
 
 import PackageDescription
 
 let package = Package(
     name: "RxKakaoPartnerSDK",
     platforms: [
-        .iOS(.v11)
+        .iOS(.v13)
     ],
     products: [
         .library(
             name: "RxKakaoPartnerSDK",
-            targets: ["RxKakaoPartnerSDKAuth", "RxKakaoPartnerSDKUser", "RxKakaoPartnerSDKTalk", "RxKakaoPartnerSDKShare"]),
+            targets: ["RxKakaoPartnerSDKAuth", "RxKakaoPartnerSDKUser", "RxKakaoPartnerSDKTalk", "RxKakaoPartnerSDKFriend", "RxKakaoPartnerSDKShare"]),
         .library(
             name: "RxKakaoPartnerSDKAuth",
             targets: ["RxKakaoPartnerSDKAuth"]),
@@ -24,17 +24,20 @@ let package = Package(
             name: "RxKakaoPartnerSDKTalk",
             targets: ["RxKakaoPartnerSDKTalk"]),
         .library(
+            name: "RxKakaoPartnerSDKFriend",
+            targets: ["RxKakaoPartnerSDKFriend"]),
+        .library(
             name: "RxKakaoPartnerSDKShare",
             targets: ["RxKakaoPartnerSDKShare"])
     ],
     dependencies: [
         .package(name: "RxKakaoOpenSDK",
                  url: "https://github.com/kakao/kakao-ios-sdk-rx.git",
-                 .exact("2.15.0")
+                 .exact("2.16.0")
                 ),
         .package(name: "KakaoPartnerSDK",
                  url: "https://github.com/kakao/kakao-partner-ios-sdk.git",
-                 .exact("2.15.0")
+                 .exact("2.16.0")
                 )
     ],
     targets: [
@@ -62,6 +65,14 @@ let package = Package(
                 .target(name: "RxKakaoPartnerSDKUser"),
                 .product(name: "KakaoPartnerSDKTalk", package: "KakaoPartnerSDK"),
                 .product(name: "RxKakaoSDKTalk", package: "RxKakaoOpenSDK"),
+            ],
+            exclude: ["Info.plist", "README.md"]
+        ),
+        .target(
+            name: "RxKakaoPartnerSDKFriend",
+            dependencies: [
+                .product(name: "KakaoPartnerSDKFriend", package: "KakaoPartnerSDK"),
+                .product(name: "RxKakaoSDKFriend", package: "RxKakaoOpenSDK")
             ],
             exclude: ["Info.plist", "README.md"]
         ),
