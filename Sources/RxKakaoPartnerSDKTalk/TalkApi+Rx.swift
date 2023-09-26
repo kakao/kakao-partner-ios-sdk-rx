@@ -27,7 +27,8 @@ import KakaoPartnerSDKTalk
 extension Reactive where Base: TalkApi  {
         
     /// 카카오톡 채팅방 목록을 가져옵니다.
-    /// - seealso: `Chats`
+    /// ## SeeAlso 
+    /// - ``Chats``
     public func chatList(filters: [ChatFilter]? = nil,
                          offset: Int? = nil,
                          limit: Int? = nil,
@@ -46,7 +47,8 @@ extension Reactive where Base: TalkApi  {
     }
     
     /// 사용자의 카카오톡 채팅방에 속한 멤버를 조회합니다. 채팅방 아이디를 기준으로 조회하며 친구인 멤버만 조회할지 여부를 선택할 수 있습니다.
-    /// - seealso: `ChatMembers`
+    /// ## SeeAlso 
+    /// - ``ChatMembers``
     public func chatMembers(chatId:Int64,
                             friendsOnly:Bool,
                             includeProfile: Bool? = nil,
@@ -94,7 +96,7 @@ extension Reactive where Base: TalkApi  {
             .asSingle()
     }
     
-    /// 개발자사이트에서 생성한 메시지 템플릿을 사용하여, 조회한 친구를 대상으로 카카오톡으로 메시지를 전송합니다. 템플릿을 생성하는 방법은 https://developers.kakao.com/docs/template 을 참고하시기 바랍니다.
+    /// 개발자사이트에서 생성한 메시지 템플릿을 사용하여, 조회한 친구를 대상으로 카카오톡으로 메시지를 전송합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
     public func sendCustomMessageForPartner(templateId: Int64, templateArgs:[String:Any]? = nil, receiverUuids:[String]) -> Single<PartnerMessageSendResult> {
         return AUTH_API.rx.responseData(.post,
                                         Urls.compose(path:PartnerPaths.customMessage),
@@ -110,7 +112,7 @@ extension Reactive where Base: TalkApi  {
             .asSingle()
     }
     
-    /// 개발자사이트에서 생성한 메시지 템플릿을 사용하여, 특정 채팅방에 카카오톡 메시지를 전송합니다. 템플릿을 생성하는 방법은 https://developers.kakao.com/docs/template 을 참고하시기 바랍니다.
+    /// 개발자사이트에서 생성한 메시지 템플릿을 사용하여, 특정 채팅방에 카카오톡 메시지를 전송합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
     public func sendCustomMessageForPartner(templateId: Int64, templateArgs:[String:Any]? = nil, receiverChatIds:[Int64]) -> Single<PartnerMessageSendResult> {
         return AUTH_API.rx.responseData(.post,
                                         Urls.compose(path:PartnerPaths.customMessage),
@@ -161,7 +163,8 @@ extension Reactive where Base: TalkApi  {
     }
     
     /// 카카오톡 친구 목록을 조회합니다. Open SDK의 확장으로 앱에 가입되지 않은 친구도 조회할 수 있습니다.
-    /// - seealso: `PartnerFriend`
+    /// ## SeeAlso 
+    /// - ``PartnerFriend``
     public func friendsForPartner(friendType:FriendType? = nil,
                                   friendFilter: FriendFilter? = nil,
                                   friendOrder: FriendOrder? = nil,

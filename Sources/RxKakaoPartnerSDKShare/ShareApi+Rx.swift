@@ -51,7 +51,9 @@ extension Reactive where Base: ShareApi  {
     }
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: [Template](../../KakaoSDKTemplate/Protocols/Templatable.html) <br> `SharingResult`
+    /// ## SeeAlso
+    /// - ``Templatable``
+    /// - ``SharingResult``
     public func shareDefault(targetAppKey:String,
                             templatable: Templatable,
                             serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
@@ -61,7 +63,8 @@ extension Reactive where Base: ShareApi  {
     }
     
     /// 기본 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: `SharingResult`
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareDefault(targetAppKey:String,
                             templateObject:[String:Any],
                             serverCallbackArgs:[String:String]? = nil ) -> Single<SharingResult> {
@@ -71,7 +74,8 @@ extension Reactive where Base: ShareApi  {
     }
     
     /// 지정된 URL을 스크랩하여 만들어진 템플릿을 카카오톡으로 공유합니다.
-    /// - seealso: `SharingResult`
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareScrap(targetAppKey:String,
                           requestUrl:String,
                           templateId:Int64? = nil,
@@ -100,8 +104,9 @@ extension Reactive where Base: ShareApi  {
             .asSingle()
     }
     
-    /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 https://developers.kakao.com/docs/latest/ko/message/ios#create-message 을 참고하시기 바랍니다.
-    /// - seealso: `SharingResult`
+    /// 카카오 디벨로퍼스에서 생성한 메시지 템플릿을 카카오톡으로 공유합니다. 템플릿을 생성하는 방법은 [https://developers.kakao.com/docs/latest/ko/message/ios#create-message](https://developers.kakao.com/docs/latest/ko/message/ios#create-message) 을 참고하시기 바랍니다.
+    /// ## SeeAlso 
+    /// - ``SharingResult``
     public func shareCustom(targetAppKey:String,
                            templateId:Int64,
                            templateArgs:[String:String]? = nil,

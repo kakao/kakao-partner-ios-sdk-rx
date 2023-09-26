@@ -34,7 +34,8 @@ extension PickerApi: ReactiveCompatible {}
 /// 친구 피커 API 호출을 담당하는 클래스입니다.
 extension Reactive where Base: PickerApi  {
     /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriends(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriends(params: params) { (selectedUsers, error) in
@@ -55,7 +56,7 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso `PickerFriendRequestParams`
     public func selectFriendsPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriendsPopup(params: params) { (selectedUsers, error) in
@@ -76,7 +77,8 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriend(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriend(params: params) { (selectedUsers, error) in
@@ -97,7 +99,8 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerFriendRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerFriendRequestParams``
     public func selectFriendPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriendPopup(params: params) { (selectedUsers, error) in
@@ -118,7 +121,8 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 채팅방 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerChatRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerChatRequestParams``
     public func selectChat(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectChat(params: params) { (selectedUsers, selectedChat, error) in
@@ -139,7 +143,8 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 채팅방 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerChatRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerChatRequestParams``
     public func selectChatPopup(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectChatPopup(params: params) { (selectedUsers, selectedChat, error) in
@@ -160,7 +165,8 @@ extension Reactive where Base: PickerApi  {
     }
     
     /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 화면 전체에 표시합니다.
-    /// - seealso: `PickerTabRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerTabRequestParams``
     public func select(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.select(params: params) { (selectedUsers, selectedChat, error) in
@@ -182,7 +188,8 @@ extension Reactive where Base: PickerApi  {
     
     
     /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 팝업 형태로 표시합니다.
-    /// - seealso: `PickerTabRequestParams`
+    /// ## SeeAlso 
+    /// - ``PickerTabRequestParams``
     public func selectPopup(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectPopup(params: params) { (selectedUsers, selectedChat, error) in
