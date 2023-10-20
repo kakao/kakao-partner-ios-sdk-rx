@@ -25,13 +25,15 @@ import KakaoPartnerSDKAuth
 
 import RxKakaoSDKCommon
 
+#if swift(>=5.8)
 @_documentation(visibility: private)
+#endif
 let AUTH_CONTROLLER = AuthController.shared
 
+#if swift(>=5.8)
 @_documentation(visibility: private)
+#endif
 extension Reactive where Base: AuthController {
-    
-    @_documentation(visibility: private)
     public func verifyAgeWithAuthenticationSession(authLevel: AuthLevel? = nil,
                                                    ageLimit: Int? = nil,
                                                    skipTerms: Bool? = false,

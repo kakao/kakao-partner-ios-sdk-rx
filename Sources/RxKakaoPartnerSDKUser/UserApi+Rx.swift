@@ -35,12 +35,16 @@ extension Reactive where Base: UserApi {
     
     // MARK: Login with Kakao Account
     
+#if swift(>=5.8)
     @_documentation(visibility: private)
+#endif
     public func loginWithKakaoAccount(accountParameters: [String:String]) -> Observable<OAuthToken> {
         return AuthController.shared.rx._authorizeWithAuthenticationSession(accountParameters:accountParameters)
     }
     
+#if swift(>=5.8)
     @_documentation(visibility: private)
+#endif
     public func loginWithKakaoAccount(prompts : [Prompt]? = nil,
                                       loginHint: String? = nil,
                                       nonce: String? = nil,
