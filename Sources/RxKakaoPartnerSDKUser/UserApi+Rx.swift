@@ -154,4 +154,48 @@ extension Reactive where Base: UserApi {
             .ignoreElements()
             .asCompletable()
     }
+    
+    /// 배송지 추가하기
+    public func createShippingAddress() -> Single<Int64> {
+        return Observable<Int64>.create { observer in
+            UserApi.shared.createShippingAddress() { (addressId, error) in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    if let addressId = addressId {
+                        observer.onNext(addressId)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(SdkError(reason: .IllegalState))
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
+        .asSingle()
+    }
+    
+    /// 배송지 수정하기
+    /// - parameters:
+    ///   - addressId: 배송지 ID
+    public func updateShippingAddress(addressId: Int64) -> Single<Int64> {
+        return Observable<Int64>.create { observer in
+            UserApi.shared.updateShippingAddress(addressId: addressId) { (_addressId, error) in
+                if let error = error {
+                    observer.onError(error)
+                } else {
+                    if let _addressId = _addressId {
+                        observer.onNext(_addressId)
+                        observer.onCompleted()
+                    } else {
+                        observer.onError(SdkError(reason: .IllegalState))
+                    }
+                }
+            }
+            
+            return Disposables.create()
+        }
+        .asSingle()
+    }
 }
