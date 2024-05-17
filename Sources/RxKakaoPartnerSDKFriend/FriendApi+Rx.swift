@@ -31,11 +31,14 @@ import KakaoPartnerSDKFriend
 
 extension PickerApi: ReactiveCompatible {}
 
-/// 친구 피커 API 호출을 담당하는 클래스입니다.
+/// [피커](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) API 클래스 \
+/// Class for the [picker](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) APIs
 extension Reactive where Base: PickerApi  {
-    /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 멀티 피커 요청 \
+    /// Requests a multi-picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriends(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriends(params: params) { (selectedUsers, error) in
@@ -55,8 +58,11 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 여러 명의 친구를 선택(멀티 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
-    /// ## SeeAlso `PickerFriendRequestParams`
+    /// 팝업 형태의 멀티 피커 요청 \
+    /// Requests a multi-picker in pop-up view
+    /// ## SeeAlso
+    /// -  [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriendsPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriendsPopup(params: params) { (selectedUsers, error) in
@@ -76,9 +82,11 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 싱글 피커 요청 \
+    /// Requests a single picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriend(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriend(params: params) { (selectedUsers, error) in
@@ -98,9 +106,11 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 한 명의 친구만 선택(싱글 피커)할 수 있는 친구 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 싱글 피커 요청 \
+    /// Requests a single picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerFriendRequestParams``
+    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     public func selectFriendPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
             PickerApi.shared.selectFriendPopup(params: params) { (selectedUsers, error) in
@@ -120,9 +130,12 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 채팅방 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 채팅방 피커 요청 \
+    /// Requests a chat picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerChatRequestParams``
+    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectChat(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectChat(params: params) { (selectedUsers, selectedChat, error) in
@@ -142,9 +155,12 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 채팅방 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 채팅방 피커 요청 \
+    /// Requests a chat picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerChatRequestParams``
+    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectChatPopup(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectChatPopup(params: params) { (selectedUsers, selectedChat, error) in
@@ -164,9 +180,12 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 화면 전체에 표시합니다.
+    /// 풀 스크린 형태의 탭 피커 요청 \
+    /// Requests a tap picker in full-screen view
     /// ## SeeAlso 
-    /// - ``PickerTabRequestParams``
+    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func select(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.select(params: params) { (selectedUsers, selectedChat, error) in
@@ -187,9 +206,12 @@ extension Reactive where Base: PickerApi  {
     }
     
     
-    /// 친구 피커와 채팅방 피커를 탭 구조로 제공하는 탭 피커를 팝업 형태로 표시합니다.
+    /// 팝업 형태의 탭 피커 요청 \
+    /// Requests a tap picker in pop-up view
     /// ## SeeAlso 
-    /// - ``PickerTabRequestParams``
+    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
+    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
+    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
     public func selectPopup(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
             PickerApi.shared.selectPopup(params: params) { (selectedUsers, selectedChat, error) in
