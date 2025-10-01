@@ -25,7 +25,7 @@ import RxKakaoSDKShare
 /// [카카오톡 공유](https://developers.kakao.com/docs/latest/ko/message/common) API 클래스 \
 /// Class for the [Kakao Talk Sharing](https://developers.kakao.com/docs/latest/ko/message/common) APIs
 extension Reactive where Base: ShareApi  {
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -60,7 +60,7 @@ extension Reactive where Base: ShareApi  {
             .asSingle()
     }
     
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -80,7 +80,7 @@ extension Reactive where Base: ShareApi  {
                                 serverCallbackArgs:serverCallbackArgs)
     }
     
-    /// 기본 템플릿으로 메시지 보내기 \
+    /// 기본 템플릿으로 메시지 발송 \
     /// Send message with default template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -99,7 +99,7 @@ extension Reactive where Base: ShareApi  {
                                 serverCallbackArgs:serverCallbackArgs)
     }
     
-    /// 스크랩 메시지 보내기 \
+    /// 스크랩 메시지 발송 \
     /// Send scrape message
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \
@@ -142,7 +142,7 @@ extension Reactive where Base: ShareApi  {
             .asSingle()
     }
     
-    /// 사용자 정의 템플릿으로 메시지 보내기 \
+    /// 사용자 정의 템플릿으로 메시지 발송 \
     /// Send message with custom template
     /// - parameters:
     ///   - targetAppKey: 출처 영역에 보여질 서비스 앱의 네이티브 키 \

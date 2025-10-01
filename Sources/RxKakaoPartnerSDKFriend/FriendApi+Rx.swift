@@ -34,62 +34,15 @@ extension PickerApi: ReactiveCompatible {}
 /// [피커](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) API 클래스 \
 /// Class for the [picker](https://developers.kakao.com/internal-docs/latest/ko/kakao-social/common) APIs
 extension Reactive where Base: PickerApi  {
-    /// 풀 스크린 형태의 멀티 피커 요청 \
-    /// Requests a multi-picker in full-screen view
-    /// ## SeeAlso 
-    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriends(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
-        return Observable<SelectedUsers>.create { observer in
-            PickerApi.shared.selectFriends(params: params) { (selectedUsers, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                else {
-                    if let selectedUsers = selectedUsers {
-                        observer.onNext(selectedUsers)
-                    }
-                    else {
-                        observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
-                    }
-                }
-            }
-            return Disposables.create()
-        }
-    }
     
-    /// 팝업 형태의 멀티 피커 요청 \
-    /// Requests a multi-picker in pop-up view
+    /// 친구 피커 \
+    /// Friends picker
     /// ## SeeAlso
-    /// -  [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriendsPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
-        return Observable<SelectedUsers>.create { observer in
-            PickerApi.shared.selectFriendsPopup(params: params) { (selectedUsers, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                else {
-                    if let selectedUsers = selectedUsers {
-                        observer.onNext(selectedUsers)
-                    }
-                    else {
-                        observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
-                    }
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    /// 풀 스크린 형태의 싱글 피커 요청 \
-    /// Requests a single picker in full-screen view
-    /// ## SeeAlso 
     /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriend(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
+    public func selectFriend(params:PickerFriendRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
-            PickerApi.shared.selectFriend(params: params) { (selectedUsers, error) in
+            PickerApi.shared.selectFriend(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, error) in
                 if let error = error {
                     observer.onError(error)
                 }
@@ -106,39 +59,15 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 팝업 형태의 싱글 피커 요청 \
-    /// Requests a single picker in pop-up view
-    /// ## SeeAlso 
-    /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriendPopup(params:PickerFriendRequestParams) -> Observable<SelectedUsers> {
-        return Observable<SelectedUsers>.create { observer in
-            PickerApi.shared.selectFriendPopup(params: params) { (selectedUsers, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                else {
-                    if let selectedUsers = selectedUsers {
-                        observer.onNext(selectedUsers)
-                    }
-                    else {
-                        observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
-                    }
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    /// 풀 스크린 형태의 채팅방 피커 요청 \
-    /// Requests a chat picker in full-screen view
+    /// 채팅방 피커 \
+    /// Chat picker
     /// ## SeeAlso 
     /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectChat(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
+    public func selectChat(params:PickerChatRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.selectChat(params: params) { (selectedUsers, selectedChat, error) in
+            PickerApi.shared.selectChat(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, selectedChat, error) in
                 if let error = error {
                     observer.onError(error)
                 }
@@ -155,66 +84,16 @@ extension Reactive where Base: PickerApi  {
         }
     }
     
-    /// 팝업 형태의 채팅방 피커 요청 \
-    /// Requests a chat picker in pop-up view
-    /// ## SeeAlso 
-    /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectChatPopup(params:PickerChatRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
-        return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.selectChatPopup(params: params) { (selectedUsers, selectedChat, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                else {
-                    if selectedUsers == nil && selectedChat == nil {
-                        observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
-                    }
-                    else {
-                        observer.onNext((selectedUsers, selectedChat))
-                    }
-                }
-            }
-            return Disposables.create()
-        }
-    }
     
-    /// 풀 스크린 형태의 탭 피커 요청 \
-    /// Requests a tap picker in full-screen view
-    /// ## SeeAlso 
+    /// 탭 피커 \
+    /// Tap picker
+    /// ## SeeAlso
     /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
     /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func select(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
+    public func select(params:PickerTabRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<(SelectedUsers?, SelectedChat?)> {
         return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.select(params: params) { (selectedUsers, selectedChat, error) in
-                if let error = error {
-                    observer.onError(error)
-                }
-                else {
-                    if selectedUsers == nil && selectedChat == nil {
-                        observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
-                    }
-                    else {
-                        observer.onNext((selectedUsers, selectedChat))
-                    }
-                }
-            }
-            return Disposables.create()
-        }
-    }
-    
-    
-    /// 팝업 형태의 탭 피커 요청 \
-    /// Requests a tap picker in pop-up view
-    /// ## SeeAlso 
-    /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
-    /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectPopup(params:PickerTabRequestParams) -> Observable<(SelectedUsers?, SelectedChat?)> {
-        return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.selectPopup(params: params) { (selectedUsers, selectedChat, error) in
+            PickerApi.shared.select(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, selectedChat, error) in
                 if let error = error {
                     observer.onError(error)
                 }

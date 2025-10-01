@@ -27,7 +27,7 @@ import RxKakaoSDKAuth
 extension Reactive where Base: AuthApi  {
     
     /// 인가 코드로 토큰 발급 \
-    /// Issues tokens with the authorization code
+    /// Issues tokens with the authorization code
     /// - parameters:
     ///   - groupRefreshToken: 그룹 앱의 리프레시 토큰 \
     ///                        Refresh token of a group app

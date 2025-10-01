@@ -43,7 +43,7 @@ extension Reactive where Base: UserApi {
         return AuthController.shared.rx._authorizeWithAuthenticationSession(accountParameters:accountParameters)
     }
     
-    /// 사용자 정보 가져오기 \
+    /// 사용자 정보 조회 \
     /// Retrieve user information
     /// - parameters:
     ///   - propertyKeys: 사용자 프로퍼티 키 목록 \
@@ -62,7 +62,7 @@ extension Reactive where Base: UserApi {
             .asSingle()
     }
     
-    /// 연결하기 \
+    /// 수동 연결 \
     /// Manual signup
     /// - parameters:
     ///   - properties: 사용자 프로퍼티 \
@@ -87,7 +87,7 @@ extension Reactive where Base: UserApi {
             .asSingle()
     }
     
-    /// 연령인증 정보 확인하기 \
+    /// 연령인증 정보 조회 \
     /// Check age verification information
     /// - parameters:
     ///   - ageLimit: 제한 연령 만족 여부를 판단하는 기준 제한 연령 \
@@ -113,7 +113,7 @@ extension Reactive where Base: UserApi {
     }
     
     
-    /// 동의항목 동의 처리하기 \
+    /// 동의항목 동의 처리 \
     /// Upgrade scopes
     /// - parameters:
     ///   - scopes: 동의항목 ID 목록 \
@@ -136,7 +136,7 @@ extension Reactive where Base: UserApi {
     
     
     
-    /// 연령인증 페이지 호출하기 \
+    /// 연령인증 페이지 호출 \
     /// Request age verification
     /// - parameters:
     ///   - authLevel: 연령인증 레벨 \
@@ -146,7 +146,7 @@ extension Reactive where Base: UserApi {
     ///   - skipTerms: 동의 화면 출력 여부 \
     ///                Whether to display the consent screen
     ///   - adultsOnly: 서비스의 청소년유해매체물 인증 필요 여부 \
-    ///                 Whetherthe service requires age verification due to the media harmful to youth
+    ///                 Whether the service requires age verification due to the media harmful to youth
     ///   - underAge: 연령인증 페이지 구분 여부(기본값: `false`) \
     ///               Whether to separate age verification pages (default: `false`)
     /// ## SeeAlso
@@ -165,7 +165,7 @@ extension Reactive where Base: UserApi {
             .asCompletable()
     }
     
-    /// 배송지 추가하기 \
+    /// 배송지 추가 \
     /// Add Shipping address
     public func createShippingAddress() -> Single<Int64> {
         return Observable<Int64>.create { observer in
@@ -187,7 +187,7 @@ extension Reactive where Base: UserApi {
         .asSingle()
     }
     
-    /// 배송지 수정하기 \
+    /// 배송지 수정 \
     /// Update Shipping address
     /// - parameters:
     ///   - addressId: 배송지 ID \
