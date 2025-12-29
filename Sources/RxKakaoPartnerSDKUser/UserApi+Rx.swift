@@ -15,7 +15,6 @@
 import Foundation
 import RxSwift
 import Alamofire
-import RxAlamofire
 
 import KakaoPartnerSDKCommon
 import KakaoSDKCommon
