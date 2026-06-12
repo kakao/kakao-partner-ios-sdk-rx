@@ -39,9 +39,9 @@ extension Reactive where Base: PickerApi  {
     /// ## SeeAlso
     /// - [`PickerFriendRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerfriendrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    public func selectFriend(params:PickerFriendRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<SelectedUsers> {
+    public func selectFriend(params:PickerFriendRequestParams, viewType: ViewType) -> Observable<SelectedUsers> {
         return Observable<SelectedUsers>.create { observer in
-            PickerApi.shared.selectFriend(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, error) in
+            PickerApi.shared.selectFriend(params: params, viewType: viewType) { (selectedUsers, error) in
                 if let error = error {
                     observer.onError(error)
                 }
@@ -63,19 +63,19 @@ extension Reactive where Base: PickerApi  {
     /// ## SeeAlso 
     /// - [`PickerChatRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickerchatrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func selectChat(params:PickerChatRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<(SelectedUsers?, SelectedChat?)> {
-        return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.selectChat(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, selectedChat, error) in
+    /// - [`SelectedChats`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchats)
+    public func selectChat(params:PickerChatRequestParams, viewType: ViewType) -> Observable<(SelectedUsers?, SelectedChats?)> {
+        return Observable<(SelectedUsers?, SelectedChats?)>.create { observer in
+            PickerApi.shared.selectChat(params: params, viewType: viewType) { (selectedUsers, selectedChats, error) in
                 if let error = error {
                     observer.onError(error)
                 }
                 else {
-                    if selectedUsers == nil && selectedChat == nil {
+                    if selectedUsers == nil && selectedChats == nil {
                         observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
                     }
                     else {
-                        observer.onNext((selectedUsers, selectedChat))
+                        observer.onNext((selectedUsers, selectedChats))
                     }
                 }
             }
@@ -89,19 +89,19 @@ extension Reactive where Base: PickerApi  {
     /// ## SeeAlso
     /// - [`PickerTabRequestParams`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/pickertabrequestparams)
     /// - [`SelectedUsers`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedusers)
-    /// - [`SelectedChat`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchat)
-    public func select(params:PickerTabRequestParams, viewType: ViewType, enableMulti: Bool = true) -> Observable<(SelectedUsers?, SelectedChat?)> {
-        return Observable<(SelectedUsers?, SelectedChat?)>.create { observer in
-            PickerApi.shared.select(params: params, viewType: viewType, enableMulti: enableMulti) { (selectedUsers, selectedChat, error) in
+    /// - [`SelectedChats`](https://developers.kakao.com/sdk/reference/ios/release/KakaoSDKFriendCore/documentation/kakaosdkfriendcore/selectedchats)
+    public func select(params:PickerTabRequestParams, viewType: ViewType, initialPickerTab: PickerTabType = .friend) -> Observable<(SelectedUsers?, SelectedChats?)> {
+        return Observable<(SelectedUsers?, SelectedChats?)>.create { observer in
+            PickerApi.shared.select(params: params, viewType: viewType, initialPickerTab: initialPickerTab) { (selectedUsers, selectedChats, error) in
                 if let error = error {
                     observer.onError(error)
                 }
                 else {
-                    if selectedUsers == nil && selectedChat == nil {
+                    if selectedUsers == nil && selectedChats == nil {
                         observer.onError(SdkError(reason: .Unknown, message: "Unknown Error."))
                     }
                     else {
-                        observer.onNext((selectedUsers, selectedChat))
+                        observer.onNext((selectedUsers, selectedChats))
                     }
                 }
             }
@@ -109,4 +109,3 @@ extension Reactive where Base: PickerApi  {
         }
     }
 }
-
