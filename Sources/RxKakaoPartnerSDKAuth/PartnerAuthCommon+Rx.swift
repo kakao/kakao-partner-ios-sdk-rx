@@ -24,21 +24,17 @@ import RxKakaoSDKCommon
 import KakaoSDKAuth
 import KakaoPartnerSDKAuth
 
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
 extension PartnerAuthCommon: ReactiveCompatible {}
 
-#if swift(>=5.8)
 @_documentation(visibility: private)
-#endif
 extension Reactive where Base: PartnerAuthCommon   {
     public func checkAgeAuthRetryComposeTransformer() -> ComposeTransformer<(HTTPURLResponse, Data), (HTTPURLResponse, Data)> {
         return ComposeTransformer<(HTTPURLResponse, Data), (HTTPURLResponse, Data)> { (observable) in
             return observable
                 .retry(when: {(observableError) -> Observable<Void> in
-                    return observableError.flatMap { (error) -> Observable<Void> in
-                        
+                    return observableError.enumerated().flatMap { (index, error) -> Observable<Void> in
+                        guard AuthApiCommon.rx.isRetryableCount(current: index, maxCount: Auth.retryTokenRefreshCount) else { throw error }
                         guard error is SdkError else { throw error }
                         let sdkError = try SdkUtils.castOrThrow(SdkError.self, error)
                         

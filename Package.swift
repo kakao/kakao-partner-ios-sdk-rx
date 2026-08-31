@@ -1,14 +1,17 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.8
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
-// sdk-version:2.28.0
+// sdk-version:2.29.0
 
 import PackageDescription
+
+let rxPackageName = "kakao-ios-sdk-rx"
+let partnerPackageName = "kakao-partner-ios-sdk"
 
 let package = Package(
     name: "RxKakaoPartnerSDK",
     platforms: [
-        .iOS(.v13)
+        .iOS(.v15)
     ],
     products: [
         .library(
@@ -31,22 +34,18 @@ let package = Package(
             targets: ["RxKakaoPartnerSDKShare"])
     ],
     dependencies: [
-        .package(name: "RxKakaoOpenSDK",
-                 url: "https://github.com/kakao/kakao-ios-sdk-rx.git",
-                 .exact("2.28.0")
-                ),
-        .package(name: "KakaoPartnerSDK",
-                 url: "https://github.com/kakao/kakao-partner-ios-sdk.git",
-                 .exact("2.28.0")
-                )
+        .package(url: "https://github.com/kakao/kakao-ios-sdk-rx.git",
+                 exact: "2.29.0"),
+        .package(url: "https://github.com/kakao/kakao-partner-ios-sdk.git",
+                 exact: "2.29.0")
     ],
     targets: [
         .target(
             name: "RxKakaoPartnerSDKAuth",
             dependencies: [
-                .product(name: "KakaoPartnerSDKAuth", package: "KakaoPartnerSDK"),
-                .product(name: "RxKakaoSDKAuth", package: "RxKakaoOpenSDK"),
-                .product(name: "RxKakaoSDKCommon", package: "RxKakaoOpenSDK"),
+                .product(name: "KakaoPartnerSDKAuth", package: partnerPackageName),
+                .product(name: "RxKakaoSDKAuth", package: rxPackageName),
+                .product(name: "RxKakaoSDKCommon", package: rxPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -54,8 +53,8 @@ let package = Package(
             name: "RxKakaoPartnerSDKUser",
             dependencies: [
                 .target(name: "RxKakaoPartnerSDKAuth"),
-                .product(name: "KakaoPartnerSDKUser", package: "KakaoPartnerSDK"),
-                .product(name: "RxKakaoSDKUser", package: "RxKakaoOpenSDK"),
+                .product(name: "KakaoPartnerSDKUser", package: partnerPackageName),
+                .product(name: "RxKakaoSDKUser", package: rxPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
@@ -63,25 +62,25 @@ let package = Package(
             name: "RxKakaoPartnerSDKTalk",
             dependencies: [
                 .target(name: "RxKakaoPartnerSDKUser"),
-                .product(name: "KakaoPartnerSDKTalk", package: "KakaoPartnerSDK"),
-                .product(name: "RxKakaoSDKTalk", package: "RxKakaoOpenSDK"),
+                .product(name: "KakaoPartnerSDKTalk", package: partnerPackageName),
+                .product(name: "RxKakaoSDKTalk", package: rxPackageName),
             ],
             exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "RxKakaoPartnerSDKFriend",
             dependencies: [
-                .product(name: "KakaoPartnerSDKFriend", package: "KakaoPartnerSDK"),
-                .product(name: "RxKakaoSDKFriend", package: "RxKakaoOpenSDK")
+                .product(name: "KakaoPartnerSDKFriend", package: partnerPackageName),
+                .product(name: "RxKakaoSDKFriend", package: rxPackageName)
             ],
             exclude: ["Info.plist", "README.md"]
         ),
         .target(
             name: "RxKakaoPartnerSDKShare",
             dependencies: [
-                .product(name: "KakaoPartnerSDKShare", package: "KakaoPartnerSDK"),
-                .product(name: "RxKakaoSDKCommon", package: "RxKakaoOpenSDK"),
-                .product(name: "RxKakaoSDKShare", package: "RxKakaoOpenSDK")
+                .product(name: "KakaoPartnerSDKShare", package: partnerPackageName),
+                .product(name: "RxKakaoSDKCommon", package: rxPackageName),
+                .product(name: "RxKakaoSDKShare", package: rxPackageName)
             ],
             exclude: ["Info.plist", "README.md"]
         )
